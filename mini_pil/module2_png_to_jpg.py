@@ -1,0 +1,33 @@
+# module2_png_to_jpg
+"""
+Converts png image to jpeg image
+"""
+import argparse
+from pathlib import Path
+
+from PIL import Image
+
+print('Running module2_png_to_jpg.py')
+
+
+def p2j(input_image, output_folder):
+    img_path = Path(input_image)
+    img = Image.open(img_path)
+    img.save(Path(output_folder).joinpath(f'{img_path.stem}.jpg'))
+    print('Converted the png image to jpg image')
+
+
+if __name__ == '__main__':
+    print('Running module2_png_to_jpg')
+    parser = argparse.ArgumentParser(description=__doc__)
+
+    # These are positional arguments (must not specify the keyword arguments)
+    parser.add_argument('input_image', type=str, help='input image path')
+    parser.add_argument('output_folder', type=str, help='output folder path')
+    args = parser.parse_args()
+
+    print(args.input_image)
+    print(args.output_folder)
+
+    p2j(rf'{args.input_image}', rf'{args.output_folder}')
+    print('Job completed')
